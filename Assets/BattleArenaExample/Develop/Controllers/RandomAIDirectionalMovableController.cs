@@ -1,0 +1,30 @@
+using UnityEngine;
+
+public class RandomAIDirectionalMovableController : Controller
+{
+    private IDirectionalMovable _movable;
+
+    private float _time;
+    private float _timeToChangeDirection;
+
+    Vector3 _inputDirection;
+
+    public RandomAIDirectionalMovableController(IDirectionalMovable movable, float timeToChangeDirection)
+    {
+        _movable = movable;
+        _timeToChangeDirection = timeToChangeDirection;
+    }
+
+    protected override void UpdateLogic(float deltaTime)
+    {
+        _time += Time.deltaTime;
+
+        if (_time >= _timeToChangeDirection)
+        {
+            _inputDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
+            _time = 0;
+        }
+
+        _movable.SetMoveDirection(_inputDirection);
+    }
+}
