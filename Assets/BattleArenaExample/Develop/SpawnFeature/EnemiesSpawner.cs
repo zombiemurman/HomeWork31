@@ -12,11 +12,10 @@ public class EnemiesSpawner
         _enemiesFactory = enemiesFactory;
     }
 
-    public List<AgentCharacter> Spawn(
+    public AgentCharacter Spawn(
         AgentEnemyConfig enemyConfig,
-        Transform target,
-        float radius,
-        float count)
+        List<Vector3> spawnPoints,
+        float radius)
     {
         Vector3 positionAroundTarget;
         NavMeshHit spawnPoint;
@@ -25,21 +24,14 @@ public class EnemiesSpawner
         queryFilter.agentTypeID = 0;
         queryFilter.areaMask = 1;
 
-        List<AgentCharacter> spawnedEnemies = new();
+        Vector2 randomPositionInCircle = Random.insideUnitCircle * radius;
+        Vector3 offset = new Vector3(randomPositionInCircle.x, 0, randomPositionInCircle.y);
 
-        for(int i = 0; i < count; i++)
-        {
-            do
-            {
-                Vector2 randomPositionInCircle = Random.insideUnitCircle * radius;
-                Vector3 offset = new Vector3(randomPositionInCircle.x, 0, randomPositionInCircle.y);
+        positionAroundTarget = spawnPoints[Random.Range(0, spawnPoints.Count)] + offset;
 
-                positionAroundTarget = target.position + offset;
-            } while (NavMesh.SamplePosition(positionAroundTarget, out spawnPoint, 0.1f, queryFilter) == false);
-
-            spawnedEnemies.Add(_enemiesFactory.CreateAgentEnemy(enemyConfig, spawnPoint.position, target));
-        }
-
-        return spawnedEnemies;
+        if (NavMesh.SamplePosition(positionAroundTarget, out spawnPoint, 1f, queryFilter))
+            return _enemiesFactory.CreateAgentEnemy(enemyConfig, spawnPoint.position);
+        else
+            return null;
     }
 }

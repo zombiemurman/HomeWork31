@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408466bd997a7c34489a6db9cf658b4a, type: 3}
   m_Name: LevelConfigs
   m_EditorClassIdentifier: 
-  <DistanceTraveledToWin>k__BackingField: 50
-  <TimeToDefeat>k__BackingField: 10
   <EnemyConfig>k__BackingField: {fileID: 11400000, guid: 6f5382f79e2c4b84fbf8925e846df246,
     type: 2}
-  <EnemiesCount>k__BackingField: 5
   <EnemiesSpawnRange>k__BackingField: 5
-  <MainHeroStartPosition>k__BackingField: {x: 1.03, y: 0, z: 1.01}
-  <EnviromentSceneName>k__BackingField: Enviroment1
+  <EnemySpawnTime>k__BackingField: 3
+  <MainHeroStartPosition>k__BackingField: {x: 1.03, y: 1, z: 1.01}
+  <EnemySpawnPoints>k__BackingField:
+  - {x: -10.5, y: 1.25, z: -10.7}
+  - {x: -10.7, y: 1.25, z: 11.2}
+  - {x: 4.7, y: 1.25, z: 1.2}
+  <WinType>k__BackingField: 1
+  <DefeatType>k__BackingField: 1
+  <TimeToWin>k__BackingField: 15
+  <KillToWin>k__BackingField: 3
+  <SpawnEnemiesToDefeat>k__BackingField: 5

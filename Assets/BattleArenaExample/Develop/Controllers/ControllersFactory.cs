@@ -14,20 +14,31 @@ public class ControllersFactory
         return new AlomgMovableVelocityRotatableController(rotatable, movable);
     }
 
+    public ShootingController CreateShootingController(IShooting shooting)
+    {
+        return new ShootingController(shooting);
+    }
+
     public CompositController CreateMainHeroController(Character character)
     {
         return new CompositController(
             CreatePlayerDirectionalMovableController(character),
-            CreateAlomgMovableVelocityRotatableController(character, character));
+            CreateAlomgMovableVelocityRotatableController(character, character),
+            CreateShootingController(character));
     }
 
     public AgentCharacterAgroController CreateAgentCharacterAgroController(
         AgentCharacter character,
-        Transform target,
-        float agroRange,
-        float minDistanceToTarget,
-        float timeToIdle)
+        Transform target)
     {
-        return new AgentCharacterAgroController(character, target, agroRange, minDistanceToTarget, timeToIdle);
+        return new AgentCharacterAgroController(character, target);
+    }
+
+    public AgentCharacterRandomMoveController CreateAgentCharacterRandomMoveController(
+        AgentCharacter character,
+        float timeMove,
+        float radius)
+    {
+        return new AgentCharacterRandomMoveController(character, timeMove, radius);
     }
 }

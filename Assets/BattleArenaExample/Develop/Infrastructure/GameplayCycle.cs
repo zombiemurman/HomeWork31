@@ -39,7 +39,7 @@ public class GameplayCycle : IDisposable
 
     public IEnumerator Prepare()
     {
-        yield return SceneManager.LoadSceneAsync(_levelConfig.EnviromentSceneName, LoadSceneMode.Additive);
+        yield return null;
 
         _mainHero = _mainHeroFactory.Create(_mainHeroConfig, _levelConfig.MainHeroStartPosition);
     }

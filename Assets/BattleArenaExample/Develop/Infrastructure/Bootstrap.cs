@@ -34,10 +34,6 @@ public class Bootstrap : MonoBehaviour
 
         MainHeroConfig mainHeroConfig = Resources.Load<MainHeroConfig>("Configs/MainHeroConfig");
 
-        LevelListConfig levelListConfig = Resources.Load<LevelListConfig>("Configs/LevelListConfig");
-
-        //создание каких-то сервисов вспомогательных
-
         _controllersUpdateService = new ControllersUpdateService();
 
         ControllersFactory controllersFactory = new ControllersFactory();
@@ -48,7 +44,7 @@ public class Bootstrap : MonoBehaviour
 
         EnemiesSpawner enemiesSpawner = new EnemiesSpawner(enemiesFactory);
 
-        LevelConfig levelConfig = levelListConfig.GetRandom();
+        LevelConfig levelConfig = Resources.Load<LevelConfig>("Configs/LevelConfigs");
 
         _gameplayCycle = new GameplayCycle(
             mainHeroFactory, 
@@ -58,20 +54,11 @@ public class Bootstrap : MonoBehaviour
             enemiesSpawner, 
             this);
 
-        //процесс инициализации рекламных сервисов, аналитики
-        //подгрузка настроек
-        //загрузка или генерация уровня/окружения
-        //другие подготовительные операции
-
-        yield return new WaitForSeconds(1.5f); //симуляция
-
-        //подготовка игры
+        yield return new WaitForSeconds(1.5f);
 
         yield return _gameplayCycle.Prepare();
 
         _loadingScreen.Hide();
-
-        //старт игры
 
         yield return _gameplayCycle.Launch();
     }

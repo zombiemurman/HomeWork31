@@ -18,7 +18,7 @@ public class EnemiesFactory
         _charactersFactory = charactersFactory;
     }
 
-    public AgentCharacter CreateAgentEnemy(AgentEnemyConfig config, Vector3 spawnPosition, Transform target)
+    public AgentCharacter CreateAgentEnemy(AgentEnemyConfig config, Vector3 spawnPosition)
     {
 
         AgentCharacter instance = _charactersFactory.CreateAgentCharacter(
@@ -26,11 +26,10 @@ public class EnemiesFactory
             spawnPosition,
             config.MoveSpeed,
             config.RotationSpeed,
-            config.JumpSpeed,
-            config.JumpCurve,
-            config.TimeToSpawn);
+            config.Health,
+            config.Damage);
 
-        Controller controller = _controllersFactory.CreateAgentCharacterAgroController(instance, target, config.AgroRange, config.MinDistanceToTarget, config.TimeForIdle);
+        Controller controller = _controllersFactory.CreateAgentCharacterRandomMoveController(instance, config.TimeMove, config.Radius);
 
         controller.Enable();
 

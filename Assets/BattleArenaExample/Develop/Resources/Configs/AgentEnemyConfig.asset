@@ -12,45 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27921ea3a0b1555429b7fb923fa52eac, type: 3}
   m_Name: AgentEnemyConfig
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 3217361919907640597, guid: 18986b0b5e39e5c4d8dd56649fdf09e0,
+  <Prefab>k__BackingField: {fileID: 3028346289694248122, guid: 6c2bd58322ec6e0408baaed07df4ce54,
     type: 3}
-  <MoveSpeed>k__BackingField: 6
+  <MoveSpeed>k__BackingField: 2
   <RotationSpeed>k__BackingField: 900
-  <JumpSpeed>k__BackingField: 5
-  <JumpCurve>k__BackingField:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.43063283
-      value: 0.9678638
-      inSlope: 0.98874044
-      outSlope: 0.98874044
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.9916687
-      value: 0
-      inSlope: -2.6173718
-      outSlope: -2.6173718
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.13374938
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  <TimeToSpawn>k__BackingField: 1
-  <AgroRange>k__BackingField: 30
-  <TimeForIdle>k__BackingField: 1
-  <MinDistanceToTarget>k__BackingField: 1
+  <Radius>k__BackingField: 10
+  <TimeMove>k__BackingField: 1
+  <Health>k__BackingField: 10
+  <Damage>k__BackingField: 10

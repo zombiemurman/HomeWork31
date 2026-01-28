@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Configs/Gameplay/AgentEnemyConfig", fileName = "AgentEnemyConfig")]
@@ -8,11 +6,9 @@ public class AgentEnemyConfig : ScriptableObject
     [field: SerializeField] public AgentCharacter Prefab {  get; private set; }
     [field: SerializeField] public float MoveSpeed { get; private set; } = 6;
     [field: SerializeField] public float RotationSpeed { get; private set; } = 900;
-    [field: SerializeField] public float JumpSpeed { get; private set; } = 5;
-    [field: SerializeField] public AnimationCurve JumpCurve { get; private set; }
-    [field: SerializeField] public float TimeToSpawn { get; private set; } = 1;
-    [field: SerializeField] public float AgroRange { get; private set; } = 30;
-    [field: SerializeField] public float TimeForIdle { get; private set; } = 1;
-    [field: SerializeField] public float MinDistanceToTarget { get; private set; } = 1;
+    [field: SerializeField] public float Radius { get; private set; } = 900;
+    [field: SerializeField] public float TimeMove { get; private set; } = 900;
+    [field: SerializeField] public float Health { get; private set; } = 10;
+    [field: SerializeField] public float Damage { get; private set; } = 10;
 
 }

@@ -21,13 +21,18 @@ public class MainHeroFactory
 
     public Character Create(MainHeroConfig config, Vector3 spawnPosition)
     {
-        Character instance = _charactersFactory.CreateCharacter(config.prefab, spawnPosition, config.MoveSpeed, config.RotationSpeed);
+        Character instance = _charactersFactory.CreateCharacter(config.prefab, spawnPosition, config.MoveSpeed, config.RotationSpeed, config.Health);
 
         CinemachineVirtualCamera followCameraPrefab = Resources.Load<CinemachineVirtualCamera>("FollowCamera");
 
         CinemachineVirtualCamera followCamera = Object.Instantiate(followCameraPrefab);
 
         followCamera.Follow = instance.CameraTarget;
+
+        ShootingConfig shootingConfig = Resources.Load<ShootingConfig>("Configs/ShootingConfig");
+        Shooting shooting = new Shooting(shootingConfig.Prefab, shootingConfig.Speed, shootingConfig.LifeTime, shootingConfig.Damage);
+
+        instance.InitializeShooting(shooting);
 
         Controller controller = _controllersFactory.CreateMainHeroController(instance);
 

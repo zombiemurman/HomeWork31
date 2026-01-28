@@ -9,7 +9,8 @@ public class CharactersFactory
         Character prefab,
         Vector3 spawnPosition,
         float moveSpeed,
-        float rotationSpeed)
+        float rotationSpeed,
+        float health)
     {
         Character instance = Object.Instantiate(prefab, spawnPosition, Quaternion.identity, null);
 
@@ -31,7 +32,7 @@ public class CharactersFactory
             throw new InvalidOperationException("Not found mover component");
         }
 
-        instance.Initialize(mover, rotater);
+        instance.Initialize(mover, rotater, health);
 
         return instance;
     }
@@ -41,9 +42,8 @@ public class CharactersFactory
         Vector3 spawnPosition,
         float moveSpeed,
         float rotationSpeed,
-        float jumpSpeed,
-        AnimationCurve jumpCurve,
-        float timeToSpawn)
+        float health,
+        float damage)
     {
         AgentCharacter instance = Object.Instantiate(prefab, spawnPosition, Quaternion.identity, null);
 
@@ -56,11 +56,8 @@ public class CharactersFactory
 
         AgentMover mover = new AgentMover(agent, moveSpeed);
         TransformDirectionalRotater rotator = new TransformDirectionalRotater(instance.transform, rotationSpeed);
-        AgentJumper jumper = new AgentJumper(jumpSpeed, agent, instance, jumpCurve);
 
-        Timer spawnTimer = new Timer(instance);
-
-        instance.Initialize(agent, mover, rotator, jumper, spawnTimer, timeToSpawn);
+        instance.Initialize(agent, mover, rotator, health, damage);
 
         return instance;
     }
