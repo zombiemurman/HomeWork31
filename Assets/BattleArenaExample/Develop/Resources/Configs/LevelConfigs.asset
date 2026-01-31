@@ -21,8 +21,8 @@ MonoBehaviour:
   - {x: -10.5, y: 1.25, z: -10.7}
   - {x: -10.7, y: 1.25, z: 11.2}
   - {x: 4.7, y: 1.25, z: 1.2}
-  <WinType>k__BackingField: 1
+  <WinType>k__BackingField: 0
   <DefeatType>k__BackingField: 1
   <TimeToWin>k__BackingField: 15
-  <KillToWin>k__BackingField: 3
-  <SpawnEnemiesToDefeat>k__BackingField: 5
+  <KillToWin>k__BackingField: 5
+  <SpawnEnemiesToDefeat>k__BackingField: 10

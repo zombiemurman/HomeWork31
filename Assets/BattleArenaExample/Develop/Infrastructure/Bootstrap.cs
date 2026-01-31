@@ -42,9 +42,9 @@ public class Bootstrap : MonoBehaviour
         MainHeroFactory mainHeroFactory = new MainHeroFactory(_controllersUpdateService, controllersFactory, charactersFactory);
         EnemiesFactory enemiesFactory = new EnemiesFactory(_controllersUpdateService, controllersFactory, charactersFactory);
 
-        EnemiesSpawner enemiesSpawner = new EnemiesSpawner(enemiesFactory);
-
         LevelConfig levelConfig = Resources.Load<LevelConfig>("Configs/LevelConfigs");
+
+        EnemiesSpawner enemiesSpawner = new EnemiesSpawner(enemiesFactory, levelConfig);
 
         _gameplayCycle = new GameplayCycle(
             mainHeroFactory, 

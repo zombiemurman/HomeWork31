@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -7,12 +8,72 @@ public class EnemiesSpawner
 {
     private EnemiesFactory _enemiesFactory;
 
-    public EnemiesSpawner(EnemiesFactory enemiesFactory)
+    private LevelConfig _levelConfig;
+
+    private float _currentEnemySpawnTime;
+
+    private int _countKill;
+
+    private List<AgentCharacter> _spawnedEnemies = new();
+
+    public EnemiesSpawner(
+        EnemiesFactory enemiesFactory,
+        LevelConfig levelConfig)
     {
         _enemiesFactory = enemiesFactory;
+        _levelConfig = levelConfig;
+
+        _countKill = 0;
+        _currentEnemySpawnTime = 0;
     }
 
-    public AgentCharacter Spawn(
+    public int CountKill => _countKill;
+
+    public int SpawnEnemiesCount => _spawnedEnemies.Count;
+
+    public void Upadate(float deltaTime)
+    {
+        _currentEnemySpawnTime += deltaTime;
+
+        if (_currentEnemySpawnTime >= _levelConfig.EnemySpawnTime)
+        {
+            AgentCharacter enemy = Spawn(
+                _levelConfig.EnemyConfig,
+                _levelConfig.EnemySpawnPoints,
+                _levelConfig.EnemiesSpawnRange);
+
+            if (enemy == null)
+                return;
+
+            enemy.Destroyed += OnDestroyed;
+
+            _spawnedEnemies.Add(enemy);
+
+            _currentEnemySpawnTime = 0;
+        }
+    }
+
+    public void ClearEnemies()
+    {
+        foreach (AgentCharacter enemy in _spawnedEnemies)
+        {
+            enemy.Destroyed -= OnDestroyed;
+            enemy.Destroy();
+        }
+
+        _spawnedEnemies.Clear();
+    }
+
+    private void OnDestroyed(MonoDestroyable destroyable)
+    {
+        _countKill++;
+
+        destroyable.Destroyed -= OnDestroyed;
+
+        _spawnedEnemies.RemoveAll(item => item.IsDestroyed);
+    }
+
+    private AgentCharacter Spawn(
         AgentEnemyConfig enemyConfig,
         List<Vector3> spawnPoints,
         float radius)
